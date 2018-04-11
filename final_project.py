@@ -6,7 +6,9 @@
 def monkey():
   print "Guess the animal:"
   #testing
-  
+def bear():
+  print "Guess the animal sound"
+  #testing
 def zooGame():
   print "      Welcome to 'Zoo Escape'"
 
