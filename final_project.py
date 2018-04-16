@@ -18,33 +18,31 @@ def end(userInput):#The purpose of this function is to quit the game if the user
       break  
 
 def userInput(): #This function will allow the user to traverse the zoo from differenct areas(1-4)
-  userInput = requestString("What area would you like to go? ")
+  userInput = requestString("Choose an area, please. ")
   printNow(userInput)
   end(userInput)#Will end/exit game
   if(userInput == "help"):#Will re-start game and provide instructions.
     zooGame() 
-    printNow(userInput)  
+    printNow(userInput) 
   if(userInput == "lush jungle"):#Area1
-    area1()
+    lushJungle()
     printNow(userInput)
-  if(userInput == "area2"):#Area2
-    area2()   
+  if(userInput == "desert oasis"):#Area2
+    desertOasis()   
     printNow(userInput)
-  if(userInput == "area3"):#Area3
-    area3()
+  if(userInput == "lost forest"):#Area3
+    lostForest()
     printNow(userInput)
-  if(userInput == "area4"):#Area4
-    area4()
+  if(userInput == "wild sahara"):#Area4
+    wildSahara()
 
 #Entrance of the zoo
 def entrance():
   showInformation("You are at the Entrance of the zoo. You have 4 areas to choose from.")
   showInformation("Desert Oasis, Lush Jungle, Lost Forest and Wild Sahara")
   showInformation("please enter you response in lower case")
-  userInput()
-  
-                   
-                                                         
+  userInput()                  
+                                                           
 #This function will allow user to listen to sound clip and guess the animal.
 def monkey():
   showInformation( "Listen Carefully to the following sound....")
@@ -102,28 +100,29 @@ def lion():
   else:
     showInformation("Sorry, you guessed wrong!")
 #Area1
-def LushJungle():
+def lushJungle():
   showInformation("Welcome to Area Lush Jungle!!!")
   monkey()
   
 
 #Area2
-def area2():
-  showInformation("Welcome to Area 2!")
+def desertOasis():
+  showInformation("Welcome to Desert Oasis!!!")
   elephant()
 
 #Area3
-def area3():
-  showInformation("Welcome to Area 3!")
+def lostForest():
+  showInformation("Welcome to Lost Forest!!!")
   bear()
 
 #Area4
-def area4():
-  showInformation("Welcome to Area 4!")
+def wildSahara():
+  showInformation("Welcome to Wild Sahara!!!")
   lion()
 
 
 def zooGame():
+  
   print ""
   print "    Welcome to 'Zoo Escape Game'" 
   print ""
@@ -143,6 +142,4 @@ def zooGame():
   print "  2) Type 'exit' to quit at any time"
   
   entrance()
-
-#test 123
-#second bla 
+ 
