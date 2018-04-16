@@ -114,6 +114,32 @@ def zooGame():
   print "  2) Type 'exit' to quit at any time"
   
   userInput()
+  
+def winningCondition():
+  bg = makePicture('C:/Users/Eric/Documents/GitHub/cst205_Final/imageZooBG.jpg')
+  monkey = makePicture('C:/Users/Eric/Documents/GitHub/cst205_Final/monkey.jpg')
+  pyCopy(monkey, bg, 503, 105, "green")
+  repaint(bg)
+  elephant = makePicture('C:/Users/Eric/Documents/GitHub/cst205_Final/elephant.jpg')
+  pyCopy(elephant, bg, 51, 82,"green")
+  repaint(bg)
+  bear = makePicture('C:/Users/Eric/Documents/GitHub/cst205_Final/bear_unedit.jpg')
+  pyCopy(bear, bg, 70, 430,"green")
+  repaint(bg)
+  lion = makePicture('C:/Users/Eric/Documents/GitHub/cst205_Final/lion.jpg')
+  pyCopy(lion, bg, 500, 400, "green")
+  repaint(bg)
+  str = "Congratulations!!! All the animals are back in their habitats"
+  myFont = makeStyle(sansSerif,italic+bold,25)
+  addTextWithStyle(bg, 70, 40,str,myFont,white)
 
+def pyCopy(source, target, targetX, targetY, sourceColor):
+  if sourceColor == "green":
+    for x in range(0, getWidth(source)):
+      for y in range(0, getHeight(source)):
+        p = getPixel(source,x,y)
+        if ((getRed(p) + getBlue(p)) > getGreen(p)):
+          color = getColor(p)
+          setColor(getPixel(target, x+targetX, y+targetY), color)
 #test 123
 #second bla 
