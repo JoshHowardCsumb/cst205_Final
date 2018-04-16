@@ -24,7 +24,7 @@ def userInput(): #This function will allow the user to traverse the zoo from dif
   if(userInput == "help"):#Will re-start game and provide instructions.
     zooGame() 
     printNow(userInput)  
-  if(userInput == "area1"):#Area1
+  if(userInput == "lush jungle"):#Area1
     area1()
     printNow(userInput)
   if(userInput == "area2"):#Area2
@@ -35,20 +35,39 @@ def userInput(): #This function will allow the user to traverse the zoo from dif
     printNow(userInput)
   if(userInput == "area4"):#Area4
     area4()
+
+#Entrance of the zoo
+def entrance():
+  showInformation("You are at the Entrance of the zoo. You have 4 areas to choose from.")
+  showInformation("Desert Oasis, Lush Jungle, Lost Forest and Wild Sahara")
+  showInformation("please enter you response in lower case")
+  userInput()
+  
                    
+                                                         
 #This function will allow user to listen to sound clip and guess the animal.
 def monkey():
   showInformation( "Listen Carefully to the following sound....")
   playAnySound()# chose file "monkey.wav"
+  repeat = requestString("Would you like to listen to sound again? Enter 'yes' or 'no'")
+  if(repeat == 'yes'):
+    playAnySound()
+  if(repeat == 'no'):
+    print "Now, time to guess..."
   answer = requestString("Guess the animal: ")
   if (answer == 'monkey'):
-    showInformation("Good job! It is correct!")
+   showInformation("Good job! It is correct!")
   else:
-    showInformation("Sorry, you guessed wrong!")
+   showInformation("Sorry, you guessed wrong!")
         
 def elephant():
   showInformation( "Listen Carefully to the following sound....")
   playAnySound()# chose file 
+  repeat = requestString("Would you like to listen to sound again? Enter 'yes' or 'no'")
+  if(repeat == 'yes'):
+    playAnySound()
+  if(repeat == 'no'):
+    print "Now, time to guess..."
   answer = requestString("Guess the animal: ")
   if (answer == 'elephant'):
     showInformation("Good job! It is correct!")
@@ -58,6 +77,11 @@ def elephant():
 def bear():
   showInformation( "Listen Carefully to the following sound....")
   playAnySound()# chose file 
+  repeat = requestString("Would you like to listen to sound again? Enter 'yes' or 'no'")
+  if(repeat == 'yes'):
+    playAnySound()
+  if(repeat == 'no'):
+    print "Now, time to guess..."
   answer = requestString("Guess the animal: ")
   if (answer == 'bear'):
     showInformation("Good job! It is correct!")
@@ -66,15 +90,20 @@ def bear():
 
 def lion():
   showInformation( "Listen Carefully to the following sound....")
-  playAnySound()# chose file 
+  playAnySound()# choose file "lion-roar.wav" file
+  repeat = requestString("Would you like to listen to sound again? Enter 'yes' or 'no'")
+  if(repeat == 'yes'):
+    playAnySound()
+  if(repeat == 'no'):
+    print "Now, time to guess..."
   answer = requestString("Guess the animal: ")
   if (answer == 'lion'):
     showInformation("Good job! It is correct!")
   else:
     showInformation("Sorry, you guessed wrong!")
 #Area1
-def area1():
-  showInformation("Welcome to Area 1!")
+def LushJungle():
+  showInformation("Welcome to Area Lush Jungle!!!")
   monkey()
   
 
@@ -113,7 +142,7 @@ def zooGame():
   print "  1) Type 'help' to redisplay this introduction"
   print "  2) Type 'exit' to quit at any time"
   
-  userInput()
+  entrance()
 
 #test 123
 #second bla 
