@@ -115,6 +115,7 @@ def zooGame():
   
   userInput()
   
+# This function displays an image to the user saying they won the game  
 def winningCondition():
   bg = makePicture('C:/Users/Eric/Documents/GitHub/cst205_Final/imageZooBG.jpg')
   monkey = makePicture('C:/Users/Eric/Documents/GitHub/cst205_Final/monkey.jpg')
