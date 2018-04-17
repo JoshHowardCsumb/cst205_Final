@@ -119,13 +119,13 @@ def zooGame():
 def winningCondition():
   bg = makePicture('C:/Users/Eric/Documents/GitHub/cst205_Final/Images/ZooMapBackGround.jpg')
   monkey = makePicture('C:/Users/Eric/Documents/GitHub/cst205_Final/Images/monkey.jpg')
-  pyCopy(monkey, bg, 503, 105, "green")
+  pyCopy(monkey, bg, 625, 175, "green")
   
   elephant = makePicture('C:/Users/Eric/Documents/GitHub/cst205_Final/Images/elephant.jpg')
   pyCopy(elephant, bg, 51, 90,"green")
   
-  bear = makePicture('C:/Users/Eric/Documents/GitHub/cst205_Final/Images/bear_unedit.jpg')
-  pyCopy(bear, bg, 85, 450,"green")
+  bear = makePicture('C:/Users/Eric/Documents/GitHub/cst205_Final/Images/bear.jpg')
+  pyCopy(bear, bg, 124, 480,"green")
   
   lion = makePicture('C:/Users/Eric/Documents/GitHub/cst205_Final/Images/lion.jpg')
   pyCopy(lion, bg, 500, 400, "green")
