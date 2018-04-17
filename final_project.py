@@ -5,7 +5,7 @@
 
 #IMPORTANT!!
 #Change the path to your GitHub pathway
-path = "C://Users//baraj//OneDrive/Documents//GitHub//cst205_Final//Files"
+path = "/Users/mercedesgarcia/Documents/GitHub/cst205_Final/Files"
 global guesses
 global bg
 global win
@@ -15,7 +15,7 @@ monkeyArea = "False"
 elephantArea = "False"
 bearArea = "False"
 win = 0
-bg = makePicture('C://Users//baraj//OneDrive//Documents//GitHub//cst205_Final//Files/ZooMapBackGround.jpg')
+bg = makePicture('/Users/mercedesgarcia/Documents/GitHub/cst205_Final/Files/ZooMapBackGround.jpg')
 guesses = 3
 #lionArea = False
 global areas
@@ -122,18 +122,24 @@ def userInput(): #This function will allow the user to traverse the zoo from dif
     if(userInput == "help"):#Will re-start game and provide instructions.
       zooGame() 
       printNow(userInput)  
-    if(userInput == "area1"):#Area1
-      area1()
+    if(userInput == "lush jungle"):#Area1
+      lushJungle()
       printNow(userInput)
-    if(userInput == "area2"):#Area2
-      area2()   
+    if(userInput == "desert oasis"):#Area2
+      desertOasis()   
       printNow(userInput)
-    if(userInput == "area3"):#Area3
-      area3()
+    if(userInput == "lost forest"):#Area3
+      lostForest()
       printNow(userInput)
-    if(userInput == "area4"):#Area4
-      area4()
-                   
+    if(userInput == "wild sahara"):#Area4
+      wildSahara()
+#Entrance of the zoo
+def entrance():
+  showInformation("You are at the Entrance of the zoo. You have 4 areas to choose from.")
+  showInformation("Desert Oasis, Lush Jungle, Lost Forest and Wild Sahara")
+  showInformation("please enter you response in lower case")
+  userInput()
+                                    
 #This function will allow user to listen to sound clip and guess the animal.
 def monkey():
   global guesses
@@ -161,7 +167,7 @@ def monkey():
       showInformation("Sorry, you guessed wrong!")
       guessesLeft()
       if guesses > 0:
-        area1()
+        lushJungle()
       else:
         print "Bye"
         
@@ -191,7 +197,7 @@ def elephant():
       showInformation("Sorry, you guessed wrong!")
       guessesLeft()
       if guesses > 0:
-        area2()
+        desertOasis()
       else:
         print "Bye"
     
@@ -221,7 +227,7 @@ def bear():
       showInformation("Sorry, you guessed wrong!")
       guessesLeft()
       if guesses > 0:
-        area3()
+        lostForest()
       else:
         print "Bye"
 
@@ -251,30 +257,27 @@ def lion():
       showInformation("Sorry, you guessed wrong!")
       guessesLeft()
       if guesses > 0:
-        area4()
+        wildSahara()
       else:
         print "Bye"
 #Area1
-def area1():
-  showInformation("Welcome to Area 1!")
+def lushJungle():
+  showInformation("Welcome to Area Lush Jungle!!!")
   monkey()
-  
 
 #Area2
-def area2():
-  showInformation("Welcome to Area 2!")
+def desertOasis():
+  showInformation("Welcome to Desert Oasis!!!")
   elephant()
 
 #Area3
-def area3():
-  showInformation("Welcome to Area 3!")
+def lostForest():
+  showInformation("Welcome to Lost Forest!!!")
   bear()
-
 #Area4
-def area4():
-  showInformation("Welcome to Area 4!")
+def wildSahara():
+  showInformation("Welcome to Wild Sahara!!!")
   lion()
-
 
 def zooGame():
   print ""
@@ -285,7 +288,7 @@ def zooGame():
   print "  4 animal have just escaped!"
   print "  You are the zookeeper and you have to find and capture the animals to return them to their cages."
   print "  You will traverse a map of the zoo by typing the name of the different area you want to go to." 
-  print "  There is Area1, Area 2, Area3, and Area 4"
+  print "  There is 'Lush Jungle', 'Desert Oasis', 'Lost Forest', and 'Wild Sahara'"
   print ""
   print "  Once you go to an area you will be prompted to listen for an animal." 
   print "  After you hear the animal sound, you have to guess which animal it is." 
@@ -295,7 +298,7 @@ def zooGame():
   print "  1) Type 'help' to redisplay this introduction"
   print "  2) Type 'exit' to quit at any time"
   
-  userInput()
+  entrance()
 
 # This function displays the text to the user saying they won the game  
 def winningCondition():
