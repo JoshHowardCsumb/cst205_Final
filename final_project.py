@@ -2,6 +2,69 @@
 
 #CST 205 Final Project
 #testing 1,2,3
+
+#IMPORTANT!!
+#ENTER YOUR IMAGE LOCATIONS HERE!!
+desertOasisImage = 'C:\Users\AlexS\cst205_Final\Images\desert_oasis.jpg'
+elephantImage = 'C:\Users\AlexS\cst205_Final\Images\elephant.jpg'
+lushJungleImage = 'C:\Users\AlexS\cst205_Final\Images\lush_jungle.jpg'
+monkeyImage = 'C:\Users\AlexS\cst205_Final\Images\monkey.jpg'
+lostForestImage = 'C:\Users\AlexS\cst205_Final\Images\lost_forest.jpg'
+bearImage = 'C:\Users\AlexS\cst205_Final\Images\bear.jpg'
+wildSaharaImage = 'C:\Users\AlexS\cst205_Final\Images\wild_sahara.jpg'
+lionImage = 'C:\Users\AlexS\cst205_Final\Images\lion.jpg'
+mapOverlayImage = 'C:\Users\AlexS\cst205_Final\Images\map_overlay.jpg'
+
+canvas = makeEmptyPicture(800,600)
+desertOasis = makePicture(desertOasisImage)
+elephant = makePicture(elephantImage)
+lushJungle = makePicture(lushJungleImage)
+monkey = makePicture(monkeyImage)
+lostForest = makePicture(lostForestImage)
+bear = makePicture(bearImage)
+wildSahara = makePicture(wildSaharaImage)
+lion = makePicture(lionImage)
+mapOverlay = makePicture(mapOverlayImage)
+
+#just a random add picture function
+def addPic():
+  return makePicture(pickAFile())
+  
+#shows the initial map  
+def makeMap():  
+  copyInto(desertOasis, canvas, 0, 0)   
+  copyInto(lushJungle, canvas, 400, 0)   
+  copyInto(lostForest, canvas, 0, 300)
+  copyInto(wildSahara, canvas, 400, 300)   
+  chromakeyLoc(mapOverlay, canvas, 0, 0, "red")
+  repaint(canvas)
+  
+#not working yet 
+def addAnimalPic(animal):
+  if animal == "elephant":
+    copyInto(elephant, canvas, 30, 30)
+  repaint(canvas)
+  
+
+#enter the source picture that has the background color that you want to emit that you want to add over the target picture at the target x and y location.
+#enter "red" or "green" for the sourceBgColor   
+def chromakeyLoc(sourcePic, targetPic, targetX, targetY, sourceBgColor):
+  for x in range(0, getWidth(sourcePic)):
+    for y in range(0, getHeight(sourcePic)):
+      p = getPixel(sourcePic,x,y)
+      sourceColor = getColor(p)
+      #if the background is red
+      if sourceBgColor == "red" and getGreen(p) + getBlue(p) < getRed(p):
+        continue
+      else:      
+        setColor(getPixel(targetPic, x+targetX, y+targetY), sourceColor)
+      #if the background is green
+      if sourceBgColor == "green" and getRed(p) + getBlue(p) < getGreen(p):
+        continue
+      else:      
+        setColor(getPixel(targetPic, x+targetX, y+targetY), sourceColor)
+  return targetPic
+
 def playAnySound():
   file = pickAFile()
   sound = makeSound(file)
