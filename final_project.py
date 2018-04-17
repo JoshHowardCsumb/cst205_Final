@@ -4,16 +4,36 @@
 #testing 1,2,3
 
 #IMPORTANT!!
-#ENTER YOUR IMAGE LOCATIONS HERE!!
-desertOasisImage = 'C:\Users\AlexS\cst205_Final\Images\desert_oasis.jpg'
-elephantImage = 'C:\Users\AlexS\cst205_Final\Images\elephant.jpg'
-lushJungleImage = 'C:\Users\AlexS\cst205_Final\Images\lush_jungle.jpg'
-monkeyImage = 'C:\Users\AlexS\cst205_Final\Images\monkey.jpg'
-lostForestImage = 'C:\Users\AlexS\cst205_Final\Images\lost_forest.jpg'
-bearImage = 'C:\Users\AlexS\cst205_Final\Images\bear.jpg'
-wildSaharaImage = 'C:\Users\AlexS\cst205_Final\Images\wild_sahara.jpg'
-lionImage = 'C:\Users\AlexS\cst205_Final\Images\lion.jpg'
-mapOverlayImage = 'C:\Users\AlexS\cst205_Final\Images\map_overlay.jpg'
+#Change the path to your GitHub pathway
+path = "C://Users//baraj//OneDrive/Documents//GitHub//cst205_Final//Files"
+global guesses
+global bg
+global win
+global lion
+lionArea = "False"
+monkeyArea = "False"
+elephantArea = "False"
+bearArea = "False"
+win = 0
+bg = makePicture('C://Users//baraj//OneDrive//Documents//GitHub//cst205_Final//Files/ZooMapBackGround.jpg')
+guesses = 3
+#lionArea = False
+global areas
+areas ={"monkeyArea":"False", "elephantArea":"False","bearArea":"False", "lionArea":"False"}
+desertOasisImage = path + '/desert oasis.jpg'
+elephantImage = path+ '/elephant.jpg'
+lushJungleImage = path + '/lush jungle.jpg'
+monkeyImage = path + '/monkey.jpg'
+#lostForestImage = 'C:\Users\AlexS\cst205_Final\Images\lost_forest.jpg'
+lostForestImage = path + '/lost forest.jpg'
+#bearImage = path + 'bear.jpg'
+bearImage = path + '/bear.jpg'
+#wildSaharaImage = 'C:\Users\AlexS\cst205_Final\Images\wild_sahara.jpg'
+wildSaharaImage = path + '/wild sahara.jpg'
+#lionImage = 'C:\Users\AlexS\cst205_Final\Images\lion.jpg'
+lionImage = path + '/lion.jpg'
+#mapOverlayImage = 'C:\Users\AlexS\cst205_Final\Images\map_overlay.jpg'
+mapOverlayImage = path + '/map_overlay.jpg'
 
 canvas = makeEmptyPicture(800,600)
 desertOasis = makePicture(desertOasisImage)
@@ -69,9 +89,16 @@ def playAnySound():
   file = pickAFile()
   sound = makeSound(file)
   play(sound)
-def guesses(): #This function should keep track of the number of guesses the user has
-  #global guesses = 4
-  showInformation("You have x number of guesses")  
+def guessesLeft(): #This function should keep track of the number of guesses the user has
+  global guesses
+  guesses = guesses - 1
+  if guesses == 0:
+    showInformation("You have no more tries left better luck next time")
+    end("exit")
+  else:
+    guess = str(guesses)
+    showInformation("You have " + guess + " guesses left")  
+    return
 
 def end(userInput):#The purpose of this function is to quit the game if the user were to input "exit".
   while(userInput == "exit"):
@@ -79,62 +106,154 @@ def end(userInput):#The purpose of this function is to quit the game if the user
       print ""
       printNow ("  Done.")
       break  
+  
 
 def userInput(): #This function will allow the user to traverse the zoo from differenct areas(1-4)
-  userInput = requestString("What area would you like to go? ")
-  printNow(userInput)
-  end(userInput)#Will end/exit game
-  if(userInput == "help"):#Will re-start game and provide instructions.
-    zooGame() 
-    printNow(userInput)  
-  if(userInput == "area1"):#Area1
-    area1()
+  global bg
+  if win == 4:
+    winningCondition()
+    end("exit")
+  else:
+    show(bg)
+    userInput = requestString("What area would you like to go? ")
     printNow(userInput)
-  if(userInput == "area2"):#Area2
-    area2()   
-    printNow(userInput)
-  if(userInput == "area3"):#Area3
-    area3()
-    printNow(userInput)
-  if(userInput == "area4"):#Area4
-    area4()
+    if (userInput == "exit"):
+      end(userInput)#Will end/exit game
+    if(userInput == "help"):#Will re-start game and provide instructions.
+      zooGame() 
+      printNow(userInput)  
+    if(userInput == "area1"):#Area1
+      area1()
+      printNow(userInput)
+    if(userInput == "area2"):#Area2
+      area2()   
+      printNow(userInput)
+    if(userInput == "area3"):#Area3
+      area3()
+      printNow(userInput)
+    if(userInput == "area4"):#Area4
+      area4()
                    
 #This function will allow user to listen to sound clip and guess the animal.
 def monkey():
-  showInformation( "Listen Carefully to the following sound....")
-  playAnySound()# chose file "monkey.wav"
-  answer = requestString("Guess the animal: ")
-  if (answer == 'monkey'):
-    showInformation("Good job! It is correct!")
+  global guesses
+  global win
+  global monkeyArea
+  if monkeyArea == "True":
+    showInformation("Wait, You already cleared this area")
+    userInput()
   else:
-    showInformation("Sorry, you guessed wrong!")
+    showInformation( "Listen Carefully to the following sound....")
+    monkeySound = path + '/monkey.wav'
+    monkeySound= makeSound(monkeySound)
+    play(monkeySound)
+    answer = requestString("Guess the animal: ")
+    if (answer == 'monkey'):
+      showInformation("Good job! It is correct!")
+      monkey = path + '/monkey.jpg'
+      monkey = makePicture(monkey)
+      pyCopy(monkey, bg, 625, 175, "green")
+      repaint(bg)
+      win +=1
+      monkeyArea = "True"
+      userInput()
+    else:
+      showInformation("Sorry, you guessed wrong!")
+      guessesLeft()
+      if guesses > 0:
+        area1()
+      else:
+        print "Bye"
         
 def elephant():
-  showInformation( "Listen Carefully to the following sound....")
-  playAnySound()# chose file 
-  answer = requestString("Guess the animal: ")
-  if (answer == 'elephant'):
-    showInformation("Good job! It is correct!")
+  global guesses 
+  global win
+  global elephantArea
+  if elephantArea == "True":
+    showInformation("Wait, You already cleared this area")
+    userInput()
   else:
-    showInformation("Sorry, you guessed wrong!")
+    showInformation( "Listen Carefully to the following sound....")
+    elephantSound = path + '/elephant.wav'
+    elephantSound= makeSound(elephantSound)
+    play(elephantSound) 
+    answer = requestString("Guess the animal: ")
+    if (answer == 'elephant'):
+      showInformation("Good job! It is correct!")
+      elephant = path + "/elephant.jpg"
+      elephant = makePicture(elephant)
+      pyCopy(elephant, bg, 51, 90,"green")
+      repaint(bg)
+      win+=1
+      elephantArea = "True"
+      userInput()
+    else:
+      showInformation("Sorry, you guessed wrong!")
+      guessesLeft()
+      if guesses > 0:
+        area2()
+      else:
+        print "Bye"
     
 def bear():
-  showInformation( "Listen Carefully to the following sound....")
-  playAnySound()# chose file 
-  answer = requestString("Guess the animal: ")
-  if (answer == 'bear'):
-    showInformation("Good job! It is correct!")
+  global guesses
+  global win
+  global bearArea
+  if bearArea == "True":
+    showInformation("Wait, You already cleared this area")
+    userInput()
   else:
-    showInformation("Sorry, you guessed wrong!")
+    showInformation( "Listen Carefully to the following sound....")
+    bearSound = path + '/bear.wav'
+    bearSound= makeSound(bearSound)
+    play(bearSound)
+    answer = requestString("Guess the animal: ")
+    if (answer == 'bear'):
+      showInformation("Good job! It is correct!")
+      bear = path +'/bear.jpg'
+      bear = makePicture(bear)
+      pyCopy(bear, bg, 124, 480,"green")
+      repaint(bg)
+      win += 1
+      bearArea = "True"
+      userInput()
+    else:
+      showInformation("Sorry, you guessed wrong!")
+      guessesLeft()
+      if guesses > 0:
+        area3()
+      else:
+        print "Bye"
 
 def lion():
-  showInformation( "Listen Carefully to the following sound....")
-  playAnySound()# chose file 
-  answer = requestString("Guess the animal: ")
-  if (answer == 'lion'):
-    showInformation("Good job! It is correct!")
+  global areas
+  global win
+  global lionArea
+  if lionArea == "True":
+    showInformation("Wait, You already cleared this area")
+    userInput()
   else:
-    showInformation("Sorry, you guessed wrong!")
+    showInformation( "Listen Carefully to the following sound....")
+    lionSound = path + '/lion.wav'
+    lionSound= makeSound(lionSound)
+    play(lionSound)
+    answer = requestString("Guess the animal: ")
+    if (answer == 'lion'):
+      showInformation("Good job! It is correct!")
+      lionArea = "True"
+      lion = path + '/lion.jpg'
+      lion = makePicture(lion)
+      pyCopy(lion, bg, 500, 400, "green")
+      repaint(bg)
+      win +=1
+      userInput()
+    else:
+      showInformation("Sorry, you guessed wrong!")
+      guessesLeft()
+      if guesses > 0:
+        area4()
+      else:
+        print "Bye"
 #Area1
 def area1():
   showInformation("Welcome to Area 1!")
@@ -170,7 +289,7 @@ def zooGame():
   print ""
   print "  Once you go to an area you will be prompted to listen for an animal." 
   print "  After you hear the animal sound, you have to guess which animal it is." 
-  print "  You are allowed a total of 2 wrong guesses before and you lose the game." 
+  print "  You are allowed a total of 3 wrong guesses before and you lose the game." 
   print "  But if you guess all of the animals right within the allowed number of guesses you will win."
   print ""
   print "  1) Type 'help' to redisplay this introduction"
@@ -178,20 +297,8 @@ def zooGame():
   
   userInput()
 
-# This function displays an image to the user saying they won the game  
+# This function displays the text to the user saying they won the game  
 def winningCondition():
-  bg = makePicture('C:/Users/Eric/Documents/GitHub/cst205_Final/Images/ZooMapBackGround.jpg')
-  monkey = makePicture('C:/Users/Eric/Documents/GitHub/cst205_Final/Images/monkey.jpg')
-  pyCopy(monkey, bg, 625, 175, "green")
-  
-  elephant = makePicture('C:/Users/Eric/Documents/GitHub/cst205_Final/Images/elephant.jpg')
-  pyCopy(elephant, bg, 51, 90,"green")
-  
-  bear = makePicture('C:/Users/Eric/Documents/GitHub/cst205_Final/Images/bear.jpg')
-  pyCopy(bear, bg, 124, 480,"green")
-  
-  lion = makePicture('C:/Users/Eric/Documents/GitHub/cst205_Final/Images/lion.jpg')
-  pyCopy(lion, bg, 500, 400, "green")
   
   str = "Congratulations!!! All the animals are back in their habitats"
   myFont = makeStyle(sansSerif,italic+bold,25)
