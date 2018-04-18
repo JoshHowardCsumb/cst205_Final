@@ -5,34 +5,25 @@
 
 #IMPORTANT!!
 #Change the path to your GitHub pathway
-path = "/Users/mercedesgarcia/Documents/GitHub/cst205_Final/Files"
+path = "C:/Users/baraj/OneDrive/Documents/GitHub/cst205_Final/Files"
+#global variables that are needed in the program
+global variables
 global guesses
-global bg
-global win
-global lion
-lionArea = "False"
-monkeyArea = "False"
-elephantArea = "False"
-bearArea = "False"
-win = 0
-bg = makePicture('/Users/mercedesgarcia/Documents/GitHub/cst205_Final/Files/ZooMapBackGround.jpg')
+#frome of the picture
+bg = path + '/ZooMapBackGround.jpg'
+bg = makePicture(bg)
+#number of guesses
 guesses = 3
-#lionArea = False
-global areas
-areas ={"monkeyArea":"False", "elephantArea":"False","bearArea":"False", "lionArea":"False"}
+#pathways to images after path has been changed to specific user
+variables ={"monkey":"False", "elephant":"False","bear":"False", "lion":"False", "win":0}
 desertOasisImage = path + '/desert oasis.jpg'
 elephantImage = path+ '/elephant.jpg'
 lushJungleImage = path + '/lush jungle.jpg'
 monkeyImage = path + '/monkey.jpg'
-#lostForestImage = 'C:\Users\AlexS\cst205_Final\Images\lost_forest.jpg'
 lostForestImage = path + '/lost forest.jpg'
-#bearImage = path + 'bear.jpg'
 bearImage = path + '/bear.jpg'
-#wildSaharaImage = 'C:\Users\AlexS\cst205_Final\Images\wild_sahara.jpg'
 wildSaharaImage = path + '/wild sahara.jpg'
-#lionImage = 'C:\Users\AlexS\cst205_Final\Images\lion.jpg'
 lionImage = path + '/lion.jpg'
-#mapOverlayImage = 'C:\Users\AlexS\cst205_Final\Images\map_overlay.jpg'
 mapOverlayImage = path + '/map_overlay.jpg'
 
 canvas = makeEmptyPicture(800,600)
@@ -85,19 +76,18 @@ def chromakeyLoc(sourcePic, targetPic, targetX, targetY, sourceBgColor):
         setColor(getPixel(targetPic, x+targetX, y+targetY), sourceColor)
   return targetPic
 
-def playAnySound():
-  file = pickAFile()
-  sound = makeSound(file)
-  play(sound)
 def guessesLeft(): #This function should keep track of the number of guesses the user has
   global guesses
-  guesses = guesses - 1
-  if guesses == 0:
+  guesses -= 1
+  #if guesses are used up the program ends
+  if guesses <= 0: 
     showInformation("You have no more tries left better luck next time")
     end("exit")
+    exit()
   else:
-    guess = str(guesses)
-    showInformation("You have " + guess + " guesses left")  
+    guesses = str(guesses)
+    showInformation("You have " + guesses + " tries left")  
+    guesses = int(guesses)
     return
 
 def end(userInput):#The purpose of this function is to quit the game if the user were to input "exit".
@@ -105,12 +95,14 @@ def end(userInput):#The purpose of this function is to quit the game if the user
     if(userInput == "exit"):
       print ""
       printNow ("  Done.")
-      break  
-  
-
+      exit() 
+#This function is called upon if an incorrect area is inserted  
+def incorrect():
+  showInformation("Enter one of the four locations. For help enter 'help'")
+  userInput()
 def userInput(): #This function will allow the user to traverse the zoo from differenct areas(1-4)
-  global bg
-  if win == 4:
+  global variables
+  if variables["win"] == 4:
     winningCondition()
     end("exit")
   else:
@@ -119,7 +111,7 @@ def userInput(): #This function will allow the user to traverse the zoo from dif
     printNow(userInput)
     if (userInput == "exit"):
       end(userInput)#Will end/exit game
-    if(userInput == "help"):#Will re-start game and provide instructions.
+    if(userInput == "help"):#Will provides instructions to what locations you can go to.
       zooGame() 
       printNow(userInput)  
     if(userInput == "lush jungle"):#Area1
@@ -133,6 +125,13 @@ def userInput(): #This function will allow the user to traverse the zoo from dif
       printNow(userInput)
     if(userInput == "wild sahara"):#Area4
       wildSahara()
+    else:
+      if variables["win"] == 4:
+        end("exit")
+      elif guesses <= 0:
+        exit()
+      else:
+        incorrect()
 #Entrance of the zoo
 def entrance():
   showInformation("You are at the Entrance of the zoo. You have 4 areas to choose from.")
@@ -140,15 +139,16 @@ def entrance():
   showInformation("please enter you response in lower case")
   userInput()
                                     
-#This function will allow user to listen to sound clip and guess the animal.
+#This function will allow user to listen to a sound clip and guess the animal.
 def monkey():
   global guesses
-  global win
-  global monkeyArea
-  if monkeyArea == "True":
+  global variables
+  #Will send the user back to the entrance if they already cleared this area
+  if variables["monkey"] == "True":
     showInformation("Wait, You already cleared this area")
     userInput()
   else:
+    #sound is played and user has to guess the animal
     showInformation( "Listen Carefully to the following sound....")
     monkeySound = path + '/monkey.wav'
     monkeySound= makeSound(monkeySound)
@@ -160,8 +160,8 @@ def monkey():
       monkey = makePicture(monkey)
       pyCopy(monkey, bg, 625, 175, "green")
       repaint(bg)
-      win +=1
-      monkeyArea = "True"
+      variables["win"] +=1
+      variables["monkey"] = "True"
       userInput()
     else:
       showInformation("Sorry, you guessed wrong!")
@@ -173,11 +173,11 @@ def monkey():
         
 def elephant():
   global guesses 
-  global win
-  global elephantArea
-  if elephantArea == "True":
+  global variables
+  if variables["elephant"] == "True":
     showInformation("Wait, You already cleared this area")
     userInput()
+    #sound is played and user has to guess the animal
   else:
     showInformation( "Listen Carefully to the following sound....")
     elephantSound = path + '/elephant.wav'
@@ -190,8 +190,8 @@ def elephant():
       elephant = makePicture(elephant)
       pyCopy(elephant, bg, 51, 90,"green")
       repaint(bg)
-      win+=1
-      elephantArea = "True"
+      variables["win"] +=1
+      variables["elephant"] = "True"
       userInput()
     else:
       showInformation("Sorry, you guessed wrong!")
@@ -203,11 +203,11 @@ def elephant():
     
 def bear():
   global guesses
-  global win
-  global bearArea
-  if bearArea == "True":
+  global variables
+  if variables["bear"] == "True":
     showInformation("Wait, You already cleared this area")
     userInput()
+     #sound is played and user has to guess the animal
   else:
     showInformation( "Listen Carefully to the following sound....")
     bearSound = path + '/bear.wav'
@@ -220,8 +220,8 @@ def bear():
       bear = makePicture(bear)
       pyCopy(bear, bg, 124, 480,"green")
       repaint(bg)
-      win += 1
-      bearArea = "True"
+      variables["win"] += 1
+      variables["bear"] = "True"
       userInput()
     else:
       showInformation("Sorry, you guessed wrong!")
@@ -232,12 +232,11 @@ def bear():
         print "Bye"
 
 def lion():
-  global areas
-  global win
-  global lionArea
-  if lionArea == "True":
+  global variables
+  if variables["lion"] == "True":
     showInformation("Wait, You already cleared this area")
     userInput()
+     #sound is played and user has to guess the animal
   else:
     showInformation( "Listen Carefully to the following sound....")
     lionSound = path + '/lion.wav'
@@ -246,12 +245,13 @@ def lion():
     answer = requestString("Guess the animal: ")
     if (answer == 'lion'):
       showInformation("Good job! It is correct!")
-      lionArea = "True"
+      variables["lion"] = "True"
       lion = path + '/lion.jpg'
       lion = makePicture(lion)
       pyCopy(lion, bg, 500, 400, "green")
       repaint(bg)
-      win +=1
+      variables["win"] +=1
+
       userInput()
     else:
       showInformation("Sorry, you guessed wrong!")
