@@ -89,12 +89,7 @@ def guessesLeft(): #This function should keep track of the number of guesses the
     guesses = int(guesses)
     return
 
-def end(userInput):#The purpose of this function is to quit the game if the user were to input "exit".
-  while(userInput == "exit"):
-    if(userInput == "exit"):
-      print ""
-      printNow ("  Done.")
-      exit() 
+
 #This function is called upon if an incorrect area is inserted  
 def incorrect():
   showInformation("Enter one of the four locations. For help enter 'help'")
@@ -107,8 +102,6 @@ def userInput(): #This function will allow the user to traverse the zoo from dif
     show(bg)
     userInput = requestString("What area would you like to go? ")
     printNow(userInput)
-    if (userInput == "exit"):
-      end(userInput)#Will end/exit game
     if(userInput == "help"):#Will provides instructions to what locations you can go to.
       zooGame() 
       printNow(userInput)  
@@ -127,6 +120,9 @@ def userInput(): #This function will allow the user to traverse the zoo from dif
       if variables["win"] == 4:
         exit()
       elif guesses == 0:
+        exit()
+      elif (userInput == "exit"):
+        print "Bye"
         exit()
       else:
         incorrect()
