@@ -5,7 +5,7 @@
 
 #IMPORTANT!!
 #Change the path to your GitHub pathway
-path = "C:/Users/baraj/OneDrive/Documents/GitHub/cst205_Final/Files"
+path = "/Users/mercedesgarcia/Documents/GitHub/cst205_Final/Files"
 #global variables that are needed in the program
 global variables
 global guesses
