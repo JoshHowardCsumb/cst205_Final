@@ -1,21 +1,24 @@
 #Authors: Joshua Howard, Eric Ybarra, Mercedes Garcia, William Barajas
+#Course: CST205: Final Project
+#Project description: A text based zoo game using image and sound manipulation.
+#  Start the game by changing the path variable to your local file then by typing zooGame() in the console.
+#Last Revision: 4/17/2018
 
-#CST 205 Final Project
-#testing 1,2,3
+#!!!IMPORTANT!!!
+#Change the path to your pathway after you have retrieved the files from GitHub
+path = "C:/Users/AlexS/cst205_Final/Files/"
 
-#IMPORTANT!!
-#Change the path to your GitHub pathway
-path = "C:/Users/baraj/OneDrive/Documents/GitHub/cst205_Final/Files"
-#global variables that are needed in the program
-global variables
-global guesses
-#frome of the picture
+#global variables needed in the program
+global variables #dictionary of elements
+variables = {"monkey":"False", "elephant":"False","bear":"False", "lion":"False", "win":0}
+global guesses #stores number of guesses
+guesses = 3
+
+#from of the picture
 bg = path + '/ZooMapBackGround.jpg'
 bg = makePicture(bg)
-#number of guesses
-guesses = 3
+
 #pathways to images after path has been changed to specific user
-variables ={"monkey":"False", "elephant":"False","bear":"False", "lion":"False", "win":0}
 desertOasisImage = path + '/desert oasis.jpg'
 elephantImage = path+ '/elephant.jpg'
 lushJungleImage = path + '/lush jungle.jpg'
@@ -36,10 +39,6 @@ bear = makePicture(bearImage)
 wildSahara = makePicture(wildSaharaImage)
 lion = makePicture(lionImage)
 mapOverlay = makePicture(mapOverlayImage)
-
-#just a random add picture function
-def addPic():
-  return makePicture(pickAFile())
   
 #shows the initial map  
 def makeMap():  
@@ -100,9 +99,9 @@ def userInput(): #This function will allow the user to traverse the zoo from dif
     winningCondition()
   else:
     show(bg)
-    userInput = requestString("What area would you like to go? ")
+    userInput = requestString("What area would you like to go, 'lush jungle', 'desert oasis', 'lost forest', or 'wild sahara'? ")
     printNow(userInput)
-    if(userInput == "help"):#Will provides instructions to what locations you can go to.
+    if(userInput == "help"):#Provide instructions to what locations you can go to.
       zooGame() 
       printNow(userInput)  
     if(userInput == "lush jungle"):#Area1
@@ -273,6 +272,7 @@ def wildSahara():
   showInformation("Welcome to Wild Sahara!!!")
   lion()
 
+#Start H
 def zooGame():
   print ""
   print "    Welcome to 'Zoo Escape Game'" 
@@ -310,6 +310,3 @@ def pyCopy(source, target, targetX, targetY, sourceColor):
         if ((getRed(p) + getBlue(p)) > getGreen(p)):
           color = getColor(p)
           setColor(getPixel(target, x+targetX, y+targetY), color)
-
-#test 123
-#second bla 
