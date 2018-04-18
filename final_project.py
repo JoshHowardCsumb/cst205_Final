@@ -82,7 +82,6 @@ def guessesLeft(): #This function should keep track of the number of guesses the
   #if guesses are used up the program ends
   if guesses <= 0: 
     showInformation("You have no more tries left better luck next time")
-    end("exit")
     exit()
   else:
     guesses = str(guesses)
@@ -128,7 +127,7 @@ def userInput(): #This function will allow the user to traverse the zoo from dif
     else:
       if variables["win"] == 4:
         end("exit")
-      elif guesses <= 0:
+      elif guesses == 0:
         exit()
       else:
         incorrect()
