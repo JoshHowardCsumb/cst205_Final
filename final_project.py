@@ -103,7 +103,6 @@ def userInput(): #This function will allow the user to traverse the zoo from dif
   global variables
   if variables["win"] == 4:
     winningCondition()
-    end("exit")
   else:
     show(bg)
     userInput = requestString("What area would you like to go? ")
@@ -126,7 +125,7 @@ def userInput(): #This function will allow the user to traverse the zoo from dif
       wildSahara()
     else:
       if variables["win"] == 4:
-        end("exit")
+        exit()
       elif guesses == 0:
         exit()
       else:
